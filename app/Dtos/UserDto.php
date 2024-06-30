@@ -4,7 +4,7 @@ namespace App\Dtos;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserDTO extends BaseDTO
+class UserDto extends BaseDto
 {
     public string $name;
     public string $email;

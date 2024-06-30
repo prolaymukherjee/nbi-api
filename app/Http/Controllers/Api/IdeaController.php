@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Dtos\IdeaDTO;
+use App\Dtos\IdeaDto;
 use Illuminate\Http\Request;
 use App\Services\Api\IdeaService;
 use App\Http\Requests\IdeaRequest;
@@ -28,7 +28,7 @@ class IdeaController extends Controller
 
     public function store(IdeaRequest $ideaRequest)
     {
-        $ideaDto = IdeaDTO::fromRequest($ideaRequest->validated());
+        $ideaDto = IdeaDto::fromRequest($ideaRequest->validated());
 
         $idea = $this->_ideaService->createIdea($ideaDto);
 

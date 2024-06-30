@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function create(UserRequest $userRequest)
     {
-        $userDto = UserDTO::fromRequest($userRequest->validated());
+        $userDto = UserDto::fromRequest($userRequest->validated());
 
         $user = $this->_userService->createUser($userDto);
 

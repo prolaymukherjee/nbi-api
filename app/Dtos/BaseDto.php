@@ -2,7 +2,7 @@
 
 namespace App\Dtos;
 
-abstract class BaseDTO
+abstract class BaseDto
 {
     abstract public static function fromModel($model): self;
 

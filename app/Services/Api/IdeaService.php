@@ -2,19 +2,19 @@
 
 namespace App\Services\Api;
 
-use App\Dtos\IdeaDTO;
+use App\Dtos\IdeaDto;
 use App\Models\Idea;
 
 class IdeaService
 {
-    public function createIdea($ideaDTO): IdeaDTO
+    public function createIdea($ideaDto): IdeaDto
     {
         $idea = Idea::create([
-            'user_id' => $ideaDTO->user_id,
-            'title' => $ideaDTO->title,
-            'description' => $ideaDTO->description,
+            'user_id' => $ideaDto->user_id,
+            'title' => $ideaDto->title,
+            'description' => $ideaDto->description,
         ]);
 
-        return IdeaDTO::fromModel($idea);
+        return IdeaDto::fromModel($idea);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Dtos;
 
 use App\Models\Idea;
 
-class IdeaDTO extends BaseDTO
+class IdeaDto extends BaseDto
 {
     public ?int $user_id;
     public ?string $ideator_name;

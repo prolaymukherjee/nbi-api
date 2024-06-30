@@ -2,15 +2,15 @@
 
 namespace App\Services\Api;
 
-use App\Dtos\UserDTO;
+use App\Dtos\UserDto;
 use App\Models\User;
 
 class UserService
 {
-    public function createUser($userDTO)
+    public function createUser($userDto)
     {
-        $user = User::create($userDTO->toArray());
+        $user = User::create($userDto->toArray());
 
-        return UserDTO::fromModel($user);
+        return UserDto::fromModel($user);
     }
 }
