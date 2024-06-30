@@ -13,7 +13,7 @@ class AuthService implements IAuthService
     public function login(array $credentials): ?User
     {
         if (!$token = JWTAuth::attempt($credentials)) {
-            return;
+            return null;
         }
 
         $user = Auth::user();
