@@ -4,11 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Idea;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class IdeaSeeder extends Seeder
 {
-
     public function run(): void
     {
         Idea::create([

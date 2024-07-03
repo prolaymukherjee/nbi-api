@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Dtos\UserDTO;
-use Illuminate\Http\Request;
-use App\Services\Api\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Services\Common\ApiResponseService;
 use App\Http\Resources\UserResource;
+use App\Services\Api\UserService;
+use App\Services\Common\ApiResponseService;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -22,9 +21,9 @@ class UserController extends Controller
 
     public function create(UserRequest $userRequest)
     {
-        $userDto = UserDto::fromRequest($userRequest->validated());
+        $userDTO = UserDTO::fromRequest($userRequest->validated());
 
-        $user = $this->_userService->createUser($userDto);
+        $user = $this->_userService->createUser($userDTO);
 
         return ApiResponseService::success(
             new UserResource($user),

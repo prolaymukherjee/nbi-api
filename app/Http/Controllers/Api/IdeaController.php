@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Dtos\IdeaDto;
-use Illuminate\Http\Request;
-use App\Services\Api\IdeaService;
-use App\Http\Requests\IdeaRequest;
+use App\Dtos\IdeaDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IdeaRequest;
 use App\Http\Resources\IdeaResource;
-use Symfony\Component\HttpFoundation\Response;
+use App\Services\Api\IdeaService;
 use App\Services\Common\ApiResponseService;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IdeaController extends Controller
 {
@@ -25,12 +25,11 @@ class IdeaController extends Controller
         //
     }
 
-
     public function store(IdeaRequest $ideaRequest)
     {
-        $ideaDto = IdeaDto::fromRequest($ideaRequest->validated());
+        $ideaDTO = IdeaDTO::fromRequest($ideaRequest->validated());
 
-        $idea = $this->_ideaService->createIdea($ideaDto);
+        $idea = $this->_ideaService->createIdea($ideaDTO);
 
         return ApiResponseService::success(
             new IdeaResource($idea),
@@ -38,18 +37,15 @@ class IdeaController extends Controller
         );
     }
 
-
     public function show(string $id)
     {
         //
     }
 
-
     public function update(Request $request, string $id)
     {
         //
     }
-
 
     public function destroy(string $id)
     {

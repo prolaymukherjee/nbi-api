@@ -2,17 +2,18 @@
 
 namespace App\Services\Api;
 
-use App\Dtos\IdeaDto;
+use App\Contracts\Services\IIdeaService;
+use App\Dtos\IdeaDTO;
 use App\Models\Idea;
 
-class IdeaService
+class IdeaService extends BaseService implements IIdeaService
 {
-    public function createIdea($ideaDto): IdeaDto
+    public function createIdea($ideaDTO): IdeaDTO
     {
         $idea = Idea::create([
-            'user_id' => $ideaDto->user_id,
-            'title' => $ideaDto->title,
-            'description' => $ideaDto->description,
+            'user_id' => $ideaDTO->user_id,
+            'title' => $ideaDTO->title,
+            'description' => $ideaDTO->description,
         ]);
 
         return IdeaDto::fromModel($idea);

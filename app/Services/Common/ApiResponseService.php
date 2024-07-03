@@ -13,7 +13,7 @@ class ApiResponseService
             'error' => false,
             'errorMessage' => null,
             'errorBags' => null,
-            'data' => $data
+            'data' => $data,
         ];
 
         return response()->json($responseData, $statusCode);

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Constants\Messages as MessagesConstant;
 use App\Contracts\Services\IAuthService;
-use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Services\Common\ApiResponseService;
 use Symfony\Component\HttpFoundation\Response;
-use App\Constants\Messages as MessagesConstant;
 
 class AuthController extends Controller
 {
@@ -24,7 +23,7 @@ class AuthController extends Controller
     {
         $user = $this->__authService->login($request->validated());
 
-        if (!($user)) {
+        if (! ($user)) {
             return ApiResponseService::error(MessagesConstant::NOT_MATCH_ERROR, Response::HTTP_UNAUTHORIZED);
         }
 

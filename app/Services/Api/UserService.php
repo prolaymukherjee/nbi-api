@@ -2,15 +2,16 @@
 
 namespace App\Services\Api;
 
-use App\Dtos\UserDto;
+use App\Contracts\Services\IUserService;
+use App\Dtos\UserDTO;
 use App\Models\User;
 
-class UserService
+class UserService extends BaseService implements IUserService
 {
-    public function createUser($userDto)
+    public function createUser(UserDTO $userDTO): ?UserDTO
     {
-        $user = User::create($userDto->toArray());
+        $user = User::create($userDTO->toArray());
 
-        return UserDto::fromModel($user);
+        return UserDTO::fromModel($user);
     }
 }

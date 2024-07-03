@@ -2,15 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Constants\Messages as MessagesConstant;
+use App\Services\Common\ApiResponseService;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use App\Services\Common\ApiResponseService;
-use App\Constants\Messages as MessagesConstant;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -32,7 +32,6 @@ class Handler extends ExceptionHandler
     {
         parent::report($exception);
     }
-
 
     public function render($request, Throwable $exception)
     {
@@ -70,7 +69,6 @@ class Handler extends ExceptionHandler
             Response::HTTP_INTERNAL_SERVER_ERROR
         );
     }
-
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {

@@ -1,14 +1,17 @@
 <?php
+
 namespace App\Dtos;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserDto extends BaseDto
+class UserDTO extends BaseDTO
 {
     public string $name;
+
     public string $email;
+
     public string $password;
+
     public string $role;
 
     public function __construct(string $name = '', string $email = '', string $password = '', string $role = '')

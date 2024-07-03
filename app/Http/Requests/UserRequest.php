@@ -2,16 +2,15 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Http\Response;
-use App\Services\Common\ApiResponseService;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
 use App\Constants\Messages as MessagesConstant;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rule;
 use App\Enums\UserRole;
-
+use App\Services\Common\ApiResponseService;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserRequest extends FormRequest
 {
@@ -19,7 +18,6 @@ class UserRequest extends FormRequest
     {
         return true;
     }
-
 
     public function rules(): array
     {
@@ -32,7 +30,7 @@ class UserRequest extends FormRequest
                     ->mixedCase()
                     ->letters()
                     ->numbers()
-                    ->symbols()
+                    ->symbols(),
             ],
             'confirm_password' => 'required|same:password',
             'role' => ['required', 'string', Rule::in(array_column(UserRole::cases(), 'value'))],
