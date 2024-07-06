@@ -8,6 +8,6 @@ class IdeaResource extends JsonResource
 {
     public function toArray($ideaDTO): array
     {
-        return $ideaDTO->toArray();
+        return $this->resource->toArray();
     }
 }

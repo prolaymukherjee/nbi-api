@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserDTO extends BaseDTO
 {
-    public string $name;
+    private string $name;
 
-    public string $email;
+    private string $email;
 
-    public string $password;
+    private string $password;
 
-    public string $role;
+    private string $role;
 
-    public function __construct(string $name = '', string $email = '', string $password = '', string $role = '')
+    public function __construct(string $name, string $email, string $password, string $role)
     {
         $this->name = $name;
         $this->email = $email;
@@ -28,17 +28,17 @@ class UserDTO extends BaseDTO
             $user->name,
             $user->email,
             '',
-            $user->role,
+            $user->role
         );
     }
 
-    public static function fromRequest($authorRequest): self
+    public static function fromRequest(array $data): self
     {
         return new self(
-            $authorRequest['name'],
-            $authorRequest['email'],
-            Hash::make($authorRequest['password']),
-            $authorRequest['role']
+            $data['name'],
+            $data['email'],
+            Hash::make($data['password']),
+            $data['role']
         );
     }
 
@@ -47,8 +47,27 @@ class UserDTO extends BaseDTO
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
             'role' => $this->role,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

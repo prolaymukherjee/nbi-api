@@ -8,6 +8,6 @@ class UserResource extends JsonResource
 {
     public function toArray($userDTO): array
     {
-        return $userDTO->toArray();
+        return $this->resource->toArray();
     }
 }

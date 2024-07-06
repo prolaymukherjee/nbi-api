@@ -4,16 +4,19 @@ namespace App\Dtos;
 
 class IdeaDTO extends BaseDTO
 {
-    public ?int $user_id;
+    private int $user_id;
 
-    public ?string $ideator_name;
+    private string $uuid;
 
-    public string $title;
+    private string $ideator_name;
 
-    public string $description;
+    private string $title;
 
-    public function __construct(?int $user_id = null, string $title = '', string $description = '', ?string $ideator_name = null)
+    private string $description;
+
+    public function __construct(string $uuid = '', ?int $user_id = null, string $title = '', string $description = '', ?string $ideator_name = null)
     {
+        $this->uuid = $uuid;
         $this->user_id = $user_id;
         $this->title = $title;
         $this->description = $description;
@@ -23,6 +26,7 @@ class IdeaDTO extends BaseDTO
     public static function fromModel($idea): self
     {
         return new self(
+            $idea->uuid,
             $idea->user_id,
             $idea->title,
             $idea->description,
@@ -33,18 +37,36 @@ class IdeaDTO extends BaseDTO
     public static function fromRequest($ideaRequest): self
     {
         return new self(
+            '',
             $ideaRequest['user_id'],
             $ideaRequest['title'],
-            $ideaRequest['description']
+            $ideaRequest['description'],
+            ''
         );
     }
 
     public function toArray(): array
     {
         return [
+            'uuid' => $this->uuid,
             'ideator' => $this->ideator_name,
             'title' => $this->title,
             'description' => $this->description,
         ];
+    }
+
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 }

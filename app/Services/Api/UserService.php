@@ -2,15 +2,24 @@
 
 namespace App\Services\Api;
 
-use App\Contracts\Services\IUserService;
+use App\Contracts\Repositories\UserRepositoryInterface;
+use App\Contracts\Services\UserServiceInterface;
 use App\Dtos\UserDTO;
-use App\Models\User;
 
-class UserService extends BaseService implements IUserService
+class UserService extends BaseService implements UserServiceInterface
 {
-    public function createUser(UserDTO $userDTO): ?UserDTO
+    protected $__userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $user = User::create($userDTO->toArray());
+        $this->__userRepository = $userRepository;
+    }
+
+    public function createUser($createUserRequest): ?UserDTO
+    {
+        $userDTO = UserDTO::fromRequest($createUserRequest);
+
+        $user = $this->__userRepository->createUser($userDTO);
 
         return UserDTO::fromModel($user);
     }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Dtos\UserDTO;
+use App\Contracts\Services\UserServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
-use App\Services\Api\UserService;
 use App\Services\Common\ApiResponseService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,16 +13,14 @@ class UserController extends Controller
 {
     protected $_userService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserServiceInterface $userService)
     {
         $this->_userService = $userService;
     }
 
-    public function create(UserRequest $userRequest)
+    public function store(UserRequest $userRequest)
     {
-        $userDTO = UserDTO::fromRequest($userRequest->validated());
-
-        $user = $this->_userService->createUser($userDTO);
+        $user = $this->_userService->createUser($userRequest->validated());
 
         return ApiResponseService::success(
             new UserResource($user),

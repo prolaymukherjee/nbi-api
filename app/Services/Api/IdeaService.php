@@ -2,19 +2,24 @@
 
 namespace App\Services\Api;
 
-use App\Contracts\Services\IIdeaService;
+use App\Contracts\Repositories\IdeaRepositoryInterface;
+use App\Contracts\Services\IdeaServiceInterface;
 use App\Dtos\IdeaDTO;
-use App\Models\Idea;
 
-class IdeaService extends BaseService implements IIdeaService
+class IdeaService extends BaseService implements IdeaServiceInterface
 {
-    public function createIdea($ideaDTO): IdeaDTO
+    protected $__ideaRepository;
+
+    public function __construct(IdeaRepositoryInterface $ideaRepository)
     {
-        $idea = Idea::create([
-            'user_id' => $ideaDTO->user_id,
-            'title' => $ideaDTO->title,
-            'description' => $ideaDTO->description,
-        ]);
+        $this->__ideaRepository = $ideaRepository;
+    }
+
+    public function createIdea($createIdeaRequest): IdeaDTO
+    {
+        $ideaDTO = IdeaDTO::fromRequest($createIdeaRequest);
+
+        $idea = $this->__ideaRepository->createIdea($ideaDTO);
 
         return IdeaDto::fromModel($idea);
     }

@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('/user/create', [UserController::class, 'create']);
+    Route::post('/user/create', [UserController::class, 'store']);
     Route::apiResource('ideas', IdeaController::class);
 });

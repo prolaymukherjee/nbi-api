@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Constants\Messages as MessagesConstant;
-use App\Contracts\Services\IAuthService;
+use App\Contracts\Services\AuthServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     protected $__authService;
 
-    public function __construct(IAuthService $authService)
+    public function __construct(AuthServiceInterface $authService)
     {
         $this->__authService = $authService;
     }

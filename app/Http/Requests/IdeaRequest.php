@@ -14,9 +14,9 @@ class IdeaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required',
-            'title' => 'required',
-            'description' => 'required',
+            'user_id' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ];
     }
 }
